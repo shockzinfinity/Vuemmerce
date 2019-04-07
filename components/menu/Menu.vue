@@ -37,7 +37,7 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'VmMenu',
 	data () {
@@ -55,7 +55,7 @@ export default {
 		},
 		getUserName () {
 			let name = this.$store.getters.getUserName;
-			
+
 			if (name === '') {
 				return 'user';
 			} else {

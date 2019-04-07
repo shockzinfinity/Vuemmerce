@@ -29,12 +29,6 @@ npm install
 # serve with hot reload at localhost:3000
 npm run dev
 
-# build for development without minification
-npm run development
-
-# build for production with minification
-npm run production
-
 ```
 
 ___
