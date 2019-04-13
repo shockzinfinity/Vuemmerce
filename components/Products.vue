@@ -11,7 +11,7 @@
           <p class="title is-4">{{ product.title }}</p>
         </div>
         <div>
-          <button class="button is-small" :title="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.id)">
+          <!-- <button class="button is-small" :title="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.id)">
             <span class="icon is-small">
               <i class="fa fa-heart"></i>
             </span>
@@ -20,13 +20,13 @@
             <span class="icon is-small">
               <i class="fa fa-heart-o"></i>
             </span>
-          </button>
+          </button> -->
         </div>
       </div>
       <div class="content is-clearfix">
         <p>{{ product.description }}</p>
         <div class="is-pulled-left">
-          <i v-if="product.ratings === 1" class="fa fa-star"></i>
+          <!-- <i v-if="product.ratings === 1" class="fa fa-star"></i>
           <i v-if="product.ratings === 2" class="fa fa-star"></i>
           <i v-if="product.ratings === 2" class="fa fa-star"></i>
           <i v-if="product.ratings === 3" class="fa fa-star"></i>
@@ -41,13 +41,13 @@
           <i v-if="product.ratings === 5" class="fa fa-star"></i>
           <i v-if="product.ratings === 5" class="fa fa-star"></i>
           <i v-if="product.ratings === 5" class="fa fa-star"></i>
-          <p>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</p>
+          <p>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</p> -->
         </div>
         <p class="is-pulled-right">
           <span class="title is-4"><strong>&euro; {{ product.price }}</strong></span>
         </p>
       </div>
-      <div class="card-footer btn-actions">
+      <!-- <div class="card-footer btn-actions">
         <div class="card-footer-item field is-grouped">
           <div class="buttons">
             <button class="button is-primary" v-if="!product.isAddedToCart" @click="addToCart(product.id)">{{ addToCartLabel }}</button>
@@ -59,9 +59,9 @@
             </select>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
-    <nuxt-link
+   <!--  <nuxt-link
       class="details"
       :to="{
         name: 'product_detail-id',
@@ -75,7 +75,7 @@
         }
       }"
     >
-    </nuxt-link>
+    </nuxt-link> -->
   </div>
 </template>
 

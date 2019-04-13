@@ -1,9 +1,9 @@
 <template>
   <div class="columns is-centered is-multiline">
-    <div class="card column is-one-quarter" v-for="product in products" :key="product.id">
+    <div class="card column is-one-quarter" v-for="product in productList" :key="product._id">
       <VmProducts :product="product"></VmProducts>
     </div>
-    <div class="section" v-if="products.length === 0">
+    <div class="section" v-if="productList.length === 0">
       <p>{{ noProductLabel }}</p>
     </div>
   </div>
@@ -15,33 +15,41 @@ import { getByTitle } from '@/assets/filters';
 
 export default {
   name: 'productsList',
-  
+
   components: { VmProducts },
-  
+
   data () {
     return {
       id: '',
       noProductLabel: 'No product found',
-      productsFiltered: []
-    };
+      productsFiltered: [],
+      productList: []
+    }
   },
 
-  computed: {
-    products () {
-      if (this.$store.state.userInfo.hasSearched) {
-        return this.getProductByTitle();
-      } else {
-        return this.$store.state.products;
-      }
-    }
+  mounted () {
+    this.getProductsFromAPI();
   },
 
   methods: {
     getProductByTitle () {
-      let listOfProducts = this.$store.state.products,
-          titleSearched = this.$store.state.userInfo.productTitleSearched;
-      
+      let
+        listOfProducts = this.$store.state.products,
+        titleSearched = this.$store.state.userInfo.productTitleSearched;
+
       return this.productsFiltered = getByTitle(listOfProducts, titleSearched);
+    },
+    getProductsFromAPI () {
+      this.$axios.get('/api/', {
+
+      }).then((response) => {
+        response.data.forEach(element => {
+          this.productList.push(element);
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
     }
   }
 
