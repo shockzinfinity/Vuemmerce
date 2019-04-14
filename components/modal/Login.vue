@@ -7,7 +7,8 @@
           <p v-if="isUserLoggedIn" class="modal-card-title">{{ modalTitleLoggedIn }}</p>
           <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
-      <form @submit="checkForm" action="#" method="post">
+      <Notification :message="messageError" v-if="error" />
+      <form @submit.prevent="login" method="post">
         <section class="modal-card-body">
           <div v-if="!isUserLoggedIn">
             <div class="field">
@@ -16,7 +17,6 @@
                     :class="[highlightEmailWithError ? 'input is-danger' : 'input']"
                     type="email"
                     :placeholder="emailPlaceholder"
-                    name="emailName"
                     v-model="email"
                     @keyup="checkEmailOnKeyUp(email)"
                   >
@@ -31,11 +31,10 @@
             </div>
             <div class="field">
               <p class="control has-icons-left has-icons-right">
-                <input 
+                <input
                   :class="[highlightPasswordWithError ? 'input is-danger' : 'input']"
                   type="password"
                   placeholder="Your password"
-                  name="passwordName"
                   v-model="password"
                   @keyup="checkPasswordOnKeyUp(password)"
                 >
@@ -52,7 +51,7 @@
           <div v-if="isUserLoggedIn" class="level">
             <div class="level-item has-text-centered">
               <div>
-                <p class="title">Welcome back!</p>
+                <p class="title">Welcome back {{ getUserName }}!</p>
                 <p class="heading">Now you are logged in</p>
               </div>
             </div>
@@ -69,6 +68,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
+import Notification from '../Notification';
 
 export default {
   name: 'login',
@@ -87,9 +87,13 @@ export default {
       password: '',
       highlightEmailWithError: null,
       highlightPasswordWithError: null,
-      isFormSuccess: false
-    };
+      isFormSuccess: false,
+      error: false,
+      messageError: ''
+    }
   },
+
+  components: { Notification },
 
   computed: {
     isUserLoggedIn () {
@@ -101,6 +105,9 @@ export default {
       } else {
         return false;
       }
+    },
+    getUserName () {
+      return this.$store.getters.getUserName;
     }
   },
 
@@ -108,14 +115,36 @@ export default {
     closeModal () {
       this.$store.commit('showLoginModal', false);
     },
-    checkForm (e) {
-      e.preventDefault();
+    async login () {
 
       if (this.email && this.password) {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
         this.isFormSuccess = true;
-        this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+
+        try {
+          await this.$axios.post('/api/login', {
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          }).then((result) => {
+            if (!result.data.error) {
+              this.error = false;
+              this.$store.commit('setUserName', result.data.name);
+              this.$store.commit('isUserSignedUp', this.isFormSuccess);
+              this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+            } else {
+              this.error = result.data.error;
+              this.messageError = result.data.message;
+            }
+          }).catch((err) => {
+
+          });
+        } catch (error) {
+          this.error = result.data.error;
+          this.messageError = result.data.message;
+        }
       }
 
       if (!this.email) {

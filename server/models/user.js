@@ -4,9 +4,11 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
   name: String,
-  age: Number
+  email: String,
+  password: String,
+  role: Number
 });
 
-const model = mongoose.model('user', schema);
+const model = mongoose.model('users', schema);
 
 module.exports = model;

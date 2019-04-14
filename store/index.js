@@ -114,7 +114,8 @@ export const state = () => ({
     isSignedUp: false,
     hasSearched: false,
     name: '',
-    productTitleSearched: ''
+    productTitleSearched: '',
+    role: null
   },
   systemInfo: {
     openLoginModal: false,
@@ -157,6 +158,9 @@ export const getters = {
   },
   quantity: state => {
     return state.products.quantity;
+  },
+  userRole: state => {
+    return state.userInfo.role;
   }
 }
 
@@ -232,11 +236,11 @@ export const mutations = {
       }
     });
   },
-  SET_USER(state, authUser) {
-    state.authUser = authUser
+  setUserRole: (state, userRole) => {
+    state.userInfo.role = userRole;
   }
 }
-/* 
+/*
 export const actions = {
   async nuxtServerInit({ commit }) {
     const res = await this.$axios.get("/api/current_user")

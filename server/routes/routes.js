@@ -1,10 +1,7 @@
-import bodyParser from 'body-parser';
 import ProductController from '../controller/product';
-import UserModel from '../models/user';
+import UserController from '../controller/user';
 
 export default app => {
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
 
   app.get('/users' , (req, res) => {
     UserModel.find({} , (err, users) => {
@@ -34,5 +31,13 @@ export default app => {
 
   app.post('/save_product', (req, res) => {
     ProductController.create(req, res);
+  });
+
+  app.post('/register', (req, res) => {
+    UserController.create(req, res);
+  });
+
+  app.post('/login', (req, res) => {
+    UserController.findByEmail(req, res);
   });
 }

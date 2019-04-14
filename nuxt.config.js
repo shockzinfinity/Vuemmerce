@@ -1,4 +1,5 @@
-const pkg = require('./package')
+import bodyParser from 'body-parser';
+import pkg from './package';
 
 module.exports = {
   mode: 'universal',
@@ -78,6 +79,8 @@ module.exports = {
   plugins: [],
 
   serverMiddleware: [
+    bodyParser.json(),
+    bodyParser.urlencoded({ extended: true }),
     '../server/index.js'
   ],
 
@@ -87,12 +90,17 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/font-awesome',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
   */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+  axios: { },
+
+  auth: {
+    token: {
+      prefix: '_token.'
+    }
   }
 }

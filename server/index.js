@@ -1,12 +1,4 @@
 /* const { Nuxt, Builder} = require('nuxt')
-const express = require('express')
-const path = require('path')
-const app = express()
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-const apiRoutes = require('./routes/routes')
-app.use('/api', apiRoutes)
 
 let config = require('../nuxt.config')
 config.dev = !(process.env.NODE_ENV === 'production')

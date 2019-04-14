@@ -1,5 +1,5 @@
 <template>
-  <form method="post">
+  <form>
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
@@ -53,7 +53,6 @@ export default {
         quantity: this.quantity,
         price: this.price
       }).then((response) => {
-        console.log(response)
         if (response.statusText === 'OK') {
           this.messageResponse = response.data.message;
         }

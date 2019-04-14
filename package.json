@@ -26,6 +26,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@nuxtjs/auth": "^4.5.3",
     "@nuxtjs/axios": "^5.4.1",
     "@nuxtjs/font-awesome": "^1.0.3",
     "babel-polyfill": "^6.26.0",

@@ -7,7 +7,8 @@
           <p v-if="isUserSignedUp" class="modal-card-title">{{ modalTitleRegistered }}</p>
           <button class="delete" aria-label="close" @click="closeModal"></button>
         </header>
-        <form @submit="checkForm" action="#" method="post">
+        <Notification :message="error" v-if="error" />
+        <form @submit.prevent="register" method="post">
           <section class="modal-card-body">
             <div v-if="!isUserSignedUp">
               <div class="field">
@@ -94,7 +95,7 @@
             </div>
           </section>
           <footer class="modal-card-foot">
-            <button v-if="!isUserSignedUp" class="button is-success">{{ primaryBtnLabel }}</button>
+            <button type="submit" v-if="!isUserSignedUp" class="button is-success">{{ primaryBtnLabel }}</button>
             <button v-if="isUserSignedUp" type="button" class="button is-info" @click="closeModal">{{ btnRegisteredLabel }}</button>
           </footer>
         </form>
@@ -104,6 +105,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
+import Notification from '../Notification';
 
 export default {
   name: 'registration',
@@ -131,7 +133,8 @@ export default {
       highlightEmailWithError: null,
       highlightPasswordWithError: null,
       highlightRepeatPasswordWithError: null,
-      isFormSuccess: false
+      isFormSuccess: false,
+      error: null
     };
   },
 
@@ -152,16 +155,22 @@ export default {
     closeModal () {
       this.$store.commit('showSignupModal', false);
     },
-    checkForm (e) {
-      e.preventDefault();
+    async register () {
 
       if (this.name && this.email && this.password && this.repeatPassword) {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
         this.isFormSuccess = true;
-        this.$store.commit('setUserName', this.name);
-        this.$store.commit('isUserSignedUp', this.isFormSuccess);
-        this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+
+        try {
+          await this.$axios.post('/api/register', {
+            name: this.name,
+            email: this.email,
+            password: this.password
+          })
+        } catch (e) {
+          this.error = e.response.data.message;
+        }
       }
 
       if (!this.name) {

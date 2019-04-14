@@ -1,4 +1,4 @@
-import ProductModel from '../models/product';
+import ProductModel from '../models/Product';
 
 //Create new Product
 export default {
@@ -113,4 +113,4 @@ export default {
     }); */
   //}
 
-};
+}
