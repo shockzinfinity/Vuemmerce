@@ -3,7 +3,7 @@
 		<div class="navbar-item">
 			<div class="field is-grouped">
 				<p class="control">
-					<a v-if="!isUserLoggedIn" class="button" @click="showSignupModal">
+					<a v-if="!isUserLoggedIn" class="button" @click="onSignupClick">
 						<span class="icon">
 							<i class="fa fa-user-plus"></i>
 						</span>
@@ -11,7 +11,7 @@
 					</a>
 				</p>
 				<p class="control">
-					<a v-if="!isUserLoggedIn" class="button" @click="showLoginModal">
+					<a v-if="!isUserLoggedIn" class="button" @click="onLoginClick">
 						<span class="icon">
 							<i class="fa fa-user"></i>
 						</span>
@@ -22,11 +22,14 @@
 		</div>
 		<div v-if="isUserLoggedIn" class="navbar-item has-dropdown is-hoverable">
 			<a class="navbar-link">
-			Welcome {{ getUserName }}
+			{{ welcomeLabel }}  {{ getUserName }}
 			</a>
 			<div class="navbar-dropdown is-boxed">
 				<nuxt-link class="navbar-item" :to="{ name: 'user-wishlist' }">
 					{{ wishlistLabel }}
+				</nuxt-link>
+        <nuxt-link v-if="isAdmin" class="navbar-item" :to="{ name: 'admin' }">
+					{{ adminLabel }}
 				</nuxt-link>
 				<hr class="navbar-divider">
 				<a class="navbar-item" @click="logout">
@@ -39,13 +42,16 @@
 
 <script>
 export default {
-	name: 'VmMenu',
-	data () {
+  name: 'VmMenu',
+
+  data () {
 		return {
 			wishlistLabel: 'Wishlist',
 			logoutLabel: 'Log out',
 			loginLabel: 'Log in',
-			signupLabel: 'Sign up'
+      signupLabel: 'Sign up',
+      adminLabel: 'Admin',
+      welcomeLabel: 'Welcome'
 		}
 	},
 
@@ -55,13 +61,16 @@ export default {
 		},
 		getUserName () {
 			let name = this.$store.getters.getUserName;
-			
+
 			if (name === '') {
 				return 'user';
 			} else {
 				return name;
 			}
-		}
+    },
+    isAdmin () {
+      return this.$store.getters.isAdmin;
+    }
 	},
 
 	methods: {
@@ -73,12 +82,20 @@ export default {
 			// redirect to homepage
 			this.$router.push({ name: 'index' });
 		},
-		showLoginModal () {
-			this.$store.commit('showLoginModal', true);
-		},
-		showSignupModal () {
-			this.$store.commit('showSignupModal', true);
-		}
+		onSignupClick () {
+      let data = {
+        show: true,
+        type: 0
+      }
+			this.$store.commit('showModal', data);
+    },
+    onLoginClick () {
+      let data = {
+        show: true,
+        type: 1
+      }
+			this.$store.commit('showModal', data);
+    }
 	}
 }
 </script>

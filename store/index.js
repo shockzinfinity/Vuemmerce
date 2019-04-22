@@ -118,9 +118,17 @@ export const state = () => ({
     role: null
   },
   systemInfo: {
-    openLoginModal: false,
-    openSignupModal: false,
-    openCheckoutModal: false
+    openModal: {
+      open: false,
+
+      /*
+      * type accepts:
+      * 0 -> Signup
+      * 1 -> Login
+      * 2 -> Checkout
+      */
+      type: null
+    }
   }
 })
 
@@ -147,20 +155,24 @@ export const getters = {
   getUserName: state => {
     return state.userInfo.name;
   },
-  isLoginModalOpen: state => {
-    return state.systemInfo.openLoginModal;
+  isModalOpen: state => {
+    return state.systemInfo.openModal.open;
   },
-  isSignupModalOpen: state => {
-    return state.systemInfo.openSignupModal;
-  },
-  isCheckoutModalOpen: state => {
-    return state.systemInfo.openCheckoutModal;
+  modalType: state => {
+    return state.systemInfo.openModal.type;
   },
   quantity: state => {
     return state.products.quantity;
   },
-  userRole: state => {
+  getUserRole: state => {
     return state.userInfo.role;
+  },
+  isAdmin: state => {
+    if (state.userInfo.role === 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -206,14 +218,9 @@ export const mutations = {
   setProductTitleSearched: (state, titleSearched) => {
     state.userInfo.productTitleSearched = titleSearched;
   },
-  showLoginModal: (state, show) => {
-    state.systemInfo.openLoginModal = show;
-  },
-  showSignupModal: (state, show) => {
-    state.systemInfo.openSignupModal = show;
-  },
-  showCheckoutModal: (state, show) => {
-    state.systemInfo.openCheckoutModal = show;
+  showModal: (state, data) => {
+    state.systemInfo.openModal.open = data.show;
+    state.systemInfo.openModal.type = data.type;
   },
   addToFavourite: (state, id) => {
     state.products.forEach(el => {

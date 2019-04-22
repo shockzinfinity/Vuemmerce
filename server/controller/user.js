@@ -16,21 +16,21 @@ export default {
     model.save()
     .then(item => {
       res.jsonp({
+        error: false,
         name: item.name,
         message: 'Registration success!'
       });
     })
     .catch(err => {
       res.jsonp({
-        result: 'KO',
+        error: true,
         message: 'Attention, user not saved'
       });
     });
   },
 
   findByEmail (req, res) {
-    console.log(req.body.data.email);
-    UserModel.findOne({ email: req.body.data.email })
+    UserModel.findOne({ email: req.body.data.email, password: req.body.data.password })
     .then(user => {
       if (!user) {
         return res.send({
@@ -40,7 +40,8 @@ export default {
       }
       res.jsonp({
         error: false,
-        name: user.name
+        name: user.name,
+        role: user.role
       });
     }).catch(err => {
       if (err.kind === 'ObjectId') {

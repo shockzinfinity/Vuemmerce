@@ -1,43 +1,51 @@
 <template>
-  <form>
-    <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input class="input" type="text" v-model="title" placeholder="Title">
+  <div class="container">
+    <form>
+      <div class="field">
+        <label class="label">{{ titleLabel }}</label>
+        <div class="control">
+          <input class="input" type="text" v-model="title" placeholder="Title">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Description</label>
-      <div class="control">
-        <textarea class="textarea" v-model="description" placeholder="Description"></textarea>
+      <div class="field">
+        <label class="label">{{ descriptionLabel }}</label>
+        <div class="control">
+          <textarea class="textarea" v-model="description" placeholder="Description"></textarea>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Price</label>
-      <div class="control">
-        <input class="input" type="text" v-model="price" placeholder="Price">
+      <div class="field">
+        <label class="label">{{ priceLabel }}</label>
+        <div class="control">
+          <input class="input" type="text" v-model="price" placeholder="Price">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Quantity</label>
-      <div class="control">
-        <input class="input" type="text" v-model="quantity" placeholder="Quantity">
+      <div class="field">
+        <label class="label">{{ quantityLabel }}</label>
+        <div class="control">
+          <input class="input" type="text" v-model="quantity" placeholder="Quantity">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <button type="button" @click="saveProduct" class="button is-link">Salva</button>
+      <div class="field">
+        <div class="control">
+          <button type="button" @click="saveProduct" class="button is-link">{{ saveLabel }}</button>
+        </div>
       </div>
-    </div>
-    {{ messageResponse }}
-  </form>
+      {{ messageResponse }}
+    </form>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'insertProduct',
+
   data () {
     return ({
+      titleLabel: 'Title',
+      descriptionLabel: 'Description',
+      priceLabel: 'Price',
+      quantityLabel: 'Quantity',
+      saveLabel: 'Save',
       title: '',
       description: '',
       quantity: null,
@@ -45,6 +53,7 @@ export default {
       messageResponse: ''
     })
   },
+
   methods: {
     saveProduct () {
       this.$axios.post('/api/save_product', {
@@ -65,4 +74,8 @@ export default {
 }
 </script>
 
-
+<style lang="scss" scoped>
+  .container {
+    padding: 20px;
+  }
+</style>

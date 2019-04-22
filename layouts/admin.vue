@@ -9,9 +9,10 @@
 
 <script>
   import VmHeader from '@/components/header/Header';
+
   export default {
     name: 'admin',
-    middleware: 'auth',
+
     components: {
       VmHeader
     }

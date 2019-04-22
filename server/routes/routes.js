@@ -3,7 +3,7 @@ import UserController from '../controller/user';
 
 export default app => {
 
-  app.get('/users' , (req, res) => {
+  /* app.get('/users' , (req, res) => {
     UserModel.find({} , (err, users) => {
       if (err) {
         res.status(404).send(err)
@@ -18,7 +18,7 @@ export default app => {
     model.save()
     res.status(201).send(model)
   });
-
+*/
   app.get('/' , (req, res) => {
     ProductController.findAll(req, res);
   });

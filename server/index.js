@@ -14,12 +14,11 @@ app.use(nuxt.render)
  */
 import express from 'express';
 import mongoose from 'mongoose';
+import router from './routes/routes';
 import keys from './config/keys';
 
 const app = express();
 const dbUrl = keys.mongoURI;
-
-import router from './routes/routes';
 
 router(app);
 
@@ -35,7 +34,7 @@ mongoose.connect(dbUrl, {
   process.exit();
 });
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
