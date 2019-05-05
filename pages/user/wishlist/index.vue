@@ -3,7 +3,7 @@
     <h3 class="title">{{ pageTitle }}</h3>
     <div class="columns is-centered is-multiline">
       <div class="card column is-one-quarter" v-for="product in productsInWishlist" :key="product.id">
-        <VmProductsList :product="product"></VmProductsList>
+        <VmProduct :product="product"></VmProduct>
       </div>
       <div class="section" v-if="productsInWishlist.length === 0">
         <p>{{ noProductLabel }}</p>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import VmProductsList from '@/components/Products';
+import VmProduct from '@/components/Product';
 import { getByTitle } from '@/assets/filters';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     }
   },
 
-  components: { VmProductsList },
+  components: { VmProduct },
 
   computed: {
     productsInWishlist () {
@@ -42,7 +42,7 @@ export default {
     getProductByTitle () {
       let listOfProducts = this.$store.getters.productsAddedToFavourite,
           titleSearched = this.$store.state.userInfo.productTitleSearched;
-      
+
       return this.productsFiltered = getByTitle(listOfProducts, titleSearched);
     }
   }

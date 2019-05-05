@@ -57,8 +57,6 @@ import { isValidEmail } from '@/assets/validators';
 export default {
   name: 'LoginForm',
 
-  props: ['bus'],
-
   data () {
     return {
       emailPlaceholder: 'Your email',

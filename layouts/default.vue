@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import VmHeader from '@/components/header/Header';
-import VmFooter from '@/components/footer/Footer';
-import VmModal from '@/components/modal/Modal';
+import VmHeader from '@/components/Header';
+import VmFooter from '@/components/Footer';
+import VmModal from '@/components/Modal';
 
 export default {
   components: {

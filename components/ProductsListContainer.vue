@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import VmProducts from '../Products';
+import VmProducts from './Product';
 import { getByTitle } from '@/assets/filters';
 
 export default {

@@ -19,7 +19,7 @@
             <VmSearch></VmSearch>
           </div>
         </div>
-        
+
         <div class="navbar-end">
           <div class="navbar-item social">
             <a href="#" class="icon" :title="facebookTooltip">
@@ -58,8 +58,8 @@
 </template>
 
 <script>
-  import VmMenu from '../menu/Menu';
-  import VmSearch from '../search/Search';
+  import VmMenu from './Menu';
+  import VmSearch from './Search';
 
   export default {
     name: 'VmHeader',
@@ -88,7 +88,11 @@
 
     methods: {
       showCheckoutModal () {
-        this.$store.commit('showCheckoutModal', true);
+        let data = {
+          show: true,
+          type: 2
+        }
+        this.$store.commit('showModal', data);
       }
     }
   };
@@ -96,7 +100,7 @@
 
 <style lang="scss" scoped>
   .title {
-    background: url('../../static/vuemmerce-logo.png') no-repeat;
+    background: url('../static/vuemmerce-logo.png') no-repeat;
     background-position: 50% 50%;
     background-size: 165px;
     width: 175px;

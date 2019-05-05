@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import VmHeader from '@/components/header/Header';
+  import VmHeader from '@/components/Header';
 
   export default {
     name: 'admin',

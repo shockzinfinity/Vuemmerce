@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import RegistrationForm from '../form/Registration';
-import LoginForm from '../form/Login';
-import Notification from '../Notification';
+import RegistrationForm from './form/Registration';
+import LoginForm from './form/Login';
+import Notification from './Notification';
 
 export default {
   name: 'modal',
@@ -54,13 +54,11 @@ export default {
       return this.$store.getters.isModalOpen;
     },
     showSignupForm () {
+      this.modalTitle = 'Signup now';
       return this.$store.getters.modalType === 0;
     },
     showLoginForm () {
       return this.$store.getters.modalType === 1;
-    },
-    showCheckoutForm () {
-      return this.$store.getters.modalType === 2;
     }
   },
 
