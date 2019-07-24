@@ -1,6 +1,15 @@
 # Vuemmerce Changelog
 
-#### 0.9.0 - 07.04.2019
+#### 0.9.3 - 24.07.2019
+* npm packages updated
+
+#### 0.9.2 - 30.06.2019
+* npm packages updated
+
+#### 0.9.1 - 22.04.2019
+* fix readme file
+
+## 0.9.0 - 07.04.2019
 * Nuxt.js framework added
 
 #### 0.8.4 - 06.04.2019

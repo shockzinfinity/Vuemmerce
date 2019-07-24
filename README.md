@@ -1,7 +1,4 @@
-![Vuemmerce ecommerce template](http://svilpress.altervista.org/vuemmerce.jpg)
-
 # Vuemmerce - Ecommerce Template
-
 Responsive ecommerce template built with Vue.js and Nuxt.js
 
 [![Build Status](https://travis-ci.org/ivanlori/Vuemmerce.svg)](https://travis-ci.org/ivanlori/Vuemmerce)
@@ -29,6 +26,12 @@ npm install
 # serve with hot reload at localhost:3000
 npm run dev
 
+# prepare for production via webpack
+npm run production
+
+# generate static pages via nuxt.js for static hosting
+nuxt generate
+
 ```
 
 ___
@@ -55,10 +58,11 @@ To contribute, please ensure that you have stable Node.js and npm installed.
 Follow the steps below.
 
 1. Follow the [Installing](#installing) instructions
-2. Create your feature
-3. Commit your changes: git commit -am 'Add some feature'
-4. Push to the branch: git push origin my-new-feature
-5. Submit a pull request
+2. Check the open issues out
+3. Create your branch with a reference to the open issue
+4. Commit your changes: git commit -am 'Add some feature'
+5. Push to the branch: git push origin my-new-feature
+6. Submit a pull request
 
 If you have any questions, feel free to email me at [ivan.lori@protonmail.com](mailto:ivan.lori@protonmail.com).
 
